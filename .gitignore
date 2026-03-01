@@ -1,0 +1,12 @@
+# Binaries
+monit
+*.exe
+
+# Config with secrets (use config.yaml for local)
+config.yaml
+monit_state.json
+
+# IDE
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,34 @@
+# Sample configuration for monit
+
+endpoints:
+  - name: api-service
+    url: https://api.example.com/health
+    error_threshold: 5
+    poll_interval: 30
+    circleci_trigger_url: "https://circleci.com/api/v2/project/gh/org/repo/pipeline"
+
+log_watches:
+  - name: migration-issues
+    service: api-service
+    pattern: "migration failed|rollback|timeout"
+    threshold: 1
+
+slack:
+  bot_token: "xoxb-your-slack-bot-token"
+  channel: "#alerts"
+
+datadog:
+  api_key: "your-datadog-api-key"
+  app_key: "your-datadog-app-key"
+
+circleci:
+  api_token: "your-circleci-api-token"
+
+openai:
+  api_key: "your-openai-api-key"
+
+github:
+  api_token: "your-github-personal-access-token"
+  owner: "your-org"
+  repo: "your-repo"
+  base_branch: "main"
