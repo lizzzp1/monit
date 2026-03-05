@@ -19,6 +19,7 @@ type Config struct {
 type Endpoint struct {
 	Name               string `yaml:"name"`
 	URL                string `yaml:"url"`
+	Service            string `yaml:"service"`
 	ErrorThreshold     int    `yaml:"error_threshold"`
 	PollInterval       int    `yaml:"poll_interval"`
 	CircleCITriggerURL string `yaml:"circleci_trigger_url"`
@@ -122,4 +123,25 @@ func defaultConfig() *Config {
 		OpenAI:     OpenAI{},
 		GitHub:     GitHub{},
 	}
+}
+
+func (c *Config) Services() []string {
+	seen := make(map[string]bool)
+	var services []string
+
+	for _, ep := range c.Endpoints {
+		if ep.Service != "" && !seen[ep.Service] {
+			services = append(services, ep.Service)
+			seen[ep.Service] = true
+		}
+	}
+
+	for _, lw := range c.LogWatches {
+		if lw.Service != "" && !seen[lw.Service] {
+			services = append(services, lw.Service)
+			seen[lw.Service] = true
+		}
+	}
+
+	return services
 }
