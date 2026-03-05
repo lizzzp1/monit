@@ -10,6 +10,14 @@ A little CLI tool that watches your services and bugs you on Slack when things g
 - Grabs recent logs from Datadog and asks AI what's wrong
 - Sends you a Slack message with a rollback button and (optionally) a revert PR link
 
+## Installation
+
+```bash
+go install .
+```
+
+Make sure `~/.local/bin` (or your Go bin directory) is in your PATH.
+
 ## Quick start
 
 ```bash
@@ -17,16 +25,16 @@ A little CLI tool that watches your services and bugs you on Slack when things g
 cp config.example.yaml config.yaml
 
 # see what endpoints are configured
-./monit status
+monit status
 
 # test your Slack connection
-./monit test
+monit test
 
 # start watching (dry-run first to see what happens)
-./monit run --dry-run
+monit run --dry-run
 
 # actually start monitoring
-./monit run
+monit run
 ```
 
 ## Config
@@ -78,7 +86,7 @@ export SLACK_BOT_TOKEN="xoxb-xxx"
 export SLACK_CHANNEL="U123456789"  # direct message to you
 export DATADOG_API_KEY="xxx"
 export OPENAI_API_KEY="sk-xxx"
-./monit run
+monit run
 ```
 
 ## How alerts work
